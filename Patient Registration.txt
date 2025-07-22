@@ -1,0 +1,90 @@
+---------------------------------------------Patient Registration Form ------------------------------------------------------------------
+
+
+
+PatientRegistrationForm.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import { addPatient } from './PatientService';
+import './App.css'; // Import CSS file
+ 
+// Patient registration form component
+const PatientRegistrationForm = ({ onRegister }) => {
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    gender: '',
+    condition: '',
+    lastVisit: '',
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const validateForm = () => {
+    const newerrors = {};
+    if(!formData.name.trim()) newerrors.name ="error";
+    setErrors(newerrors)
+    return Object.values(newerrors).length === 0;
+  };
+//   const isValidDate = (dateString) => {
+// //    validate date
+//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validate = validateForm();
+    if(!validate){
+      return
+    }
+    onRegister(formData)
+    setErrors({})
+    setFormData({
+    name: '',
+    age: '',
+    gender: '',
+    condition: '',
+    lastVisit: '',
+    })
+    // // Call parent function to register patient and validate form
+ 
+  };
+ 
+  return (
+    <div>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor='name'>name</label>
+      <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} placeholder='Name'></input>
+      <label htmlFor='age'>age</label>
+      <input type='text' id='' name='age' value={formData.age} onChange={handleChange} placeholder='Age'></input>
+      <select onChange={handleChange} value={formData.gender} name='gender'>
+        <option disabled value="">Select Gender</option>
+        <option value="Male">MALE</option>
+        <option value="Female">FEMALE</option>
+      </select>
+      <input placeholder='Condition' onChange={handleChange} value={formData.condition} type='text' name='condition'></input>
+      <input placeholder='Last Visit (YYYY-MM-DD)' onChange={handleChange} value={formData.lastVisit} type='date' name='lastVisit'></input>
+      <button type='submit'>Register Patient</button>
+    </form>
+     <p>Name is required</p>
+     <p>Age is required</p>
+     <p>Gender is required</p>
+     <p>Condition is required</p>
+     <p>Last Visit is required</p>
+  </div>      
+  );
+};
+export default PatientRegistrationForm;
