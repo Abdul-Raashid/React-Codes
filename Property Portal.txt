@@ -1,0 +1,103 @@
+
+
+-------------------------------------------------------------------- 5. Property Portal ---------------------------------------------------------------
+
+PropertList.js
+
+
+
+
+import React, { useState } from 'react';
+import PropertyDetails from './PropertyDetails';
+
+const PropertyList = () => {
+
+  const [properties, setProperties] = useState([
+    { id: 1, name: 'Property 1', location: 'Location 1', price: 100000 },
+    { id: 2, name: 'Property 2', location: 'Location 2', price: 150000 },
+    { id: 3, name: 'Property 3', location: 'Location 3', price: 200000 }
+  ]);
+  const[ok,setOk]=useState(
+    { id: 0, name: '', location: '', price: 0 }
+  )
+  const[count,setCount]=useState(3);
+
+  const handleAddProperty = () => {
+    // setProperties([...properties, ok]);
+    // setOk(properties.length+1)
+
+    setCount(count+1);
+  }
+
+  const handleRemoveProperty = (id) => {
+    // setProperties(properties.filter((item)=>item.id!==id));
+    setCount(count-1);
+  }
+
+
+  let listItems;
+  if(count==2){
+    listItems=(
+      <ul>
+      <li>1</li>
+      <li>2</li>
+      </ul>
+    )
+  }
+
+  else if(count==3){
+    listItems=(
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    )
+  }
+
+  else if(count==4){
+    listItems=(
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+      </ul>
+    )
+  }
+  
+  
+
+
+return (
+  <div>
+    {/* <p>Property List</p>
+    <button onClick={handleAddProperty}>Add Property</button>
+
+    <ul>
+      {properties.map((item)=>(
+        <li>{item.id}<button onClick={()=>handleRemoveProperty(item.id)}>Remove Property</button></li>
+      ))}
+    </ul> */}
+    <p>Property List</p>
+
+    {listItems}
+
+    <button onClick={handleAddProperty}>Add Property</button>
+    <button onClick={handleRemoveProperty}>Remove Property</button>
+  </div>
+
+ );
+
+
+
+
+};
+
+
+export default PropertyList;
+
+ 
+
+
+

@@ -1,0 +1,86 @@
+
+-------------------------------------------------------------------2. Travel Wishlist ----------------------------------------------------------------------
+
+WishList.js
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import '../../App.css';
+ 
+const WishList = ({ initialLocations }) => {
+  const [locations, setLocations] = useState(initialLocations);
+  const [newLocation, setNewLocation] = useState('');
+  const [error, setError] = useState('');
+  const[pro,setPro]=useState(false);
+ 
+  // useEffect(() => {
+  //   console.log("Previous Wish List:", initialLocations);
+  // }, []);
+ 
+ 
+  const addLocation = (newLocation) => {
+    // check if location is not empty and does not exists alread
+    // add new location to whish list and clear erros
+ 
+  };
+ 
+  const removeLocation = (locationToRemove) => {
+    // remove locations locations
+  };
+ 
+  const handleSubmit = (e) => {
+    // prevent default submistion and call add location form
+    // clear new location state
+   
+  };
+ 
+ 
+    if(pro) {
+      return (
+        <div className="wish-list-container">
+        <h2>Travel Wish List</h2>
+        <p>Paris</p>
+ 
+        <p>New York</p>
+        <ul className="location-list">
+        {/* list down locations using map  */}
+        <li><button>X</button></li>
+         
+        </ul>
+        {/* display locations erros  */}
+       {/* create location form and call addLocation method on submission */}
+ 
+      <p>London</p>
+       <button placeholder='Add new location'>Add</button>  
+      </div>
+      )
+    }
+    return (
+      <div className="wish-list-container">
+        <h2>Travel Wish List</h2>
+        <p>Paris</p>
+        <p>New York</p>
+        <ul className="location-list">
+        {/* list down locations using map  */}
+        <li>Tokyo<button onClick={(e) => setPro(!pro)}>X</button></li>
+         
+        </ul>
+        {/* display locations erros  */}
+       {/* create location form and call addLocation method on submission */}
+ 
+      <p>London</p>
+       <button placeholder='Add new location'>Add</button>  
+ 
+       {console.log('Previous Wish List:', initialLocations)}
+      </div>
+    );
+};
+ 
+// console.log('Previous Wish List:');
+ 
+export default WishList;
+
+

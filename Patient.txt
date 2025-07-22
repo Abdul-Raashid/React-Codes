@@ -1,0 +1,74 @@
+
+-----------------------------------------------------------------------8. Patient ------------------------------------------------------------------------
+
+PatientForm.js
+
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './App.css';
+const PatientForm = () => {
+  const [formData, setFormData] = useState({
+    name: 'John Doe',
+    dob: '1990-01-01',
+    medicalHistory: 'No significant history.',
+    currentMedications: 'Aspirin',
+  });
+
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Clear the error when user starts typing
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // validate form data if form is valid than navigate to welcome page
+  };
+
+  const validate = (data) => {
+    const errors = {};
+    // add validation rules 
+    return errors;
+  };
+
+ 
+  return (
+    <div className="form-container">
+      <h1>Patient Registration</h1>
+      <form onSubmit={handleSubmit}>
+      <label htmlFor='name'>Name:</label>
+      <input id='name' name='name' value={formData.name} onChange={handleChange}/>
+      <label htmlFor='dob'>Date of Birth:</label>
+      <input id='dob' name='dob' value={formData.dob} onChange={handleChange}/>
+      <label htmlFor='med'>Medical History:</label>
+      <input id='med' name='med' value={formData.medicalHistory} onChange={handleChange}/>
+      <label htmlFor='curr'>Current Medications:</label>
+      <input id='curr' name='curr' value={formData.currentMedications} onChange={handleChange}/>
+    <button type='submit'>Submit</button>
+    </form>
+
+    <p>Name is required</p>
+    <p>Date of Birth is required</p>
+    <p>Date of Birth cannot be a future date</p>
+      
+    </div>
+  );
+
+
+}
+
+
+
+export default PatientForm;
+
+

@@ -1,0 +1,71 @@
+-----------------------------------------------------------------------7. Professor Management-------------------------------------------------------------
+
+
+AddProfessorForm.js
+
+
+
+
+
+
+
+// AddProfessorForm.js
+import React, { useEffect, useState } from "react";
+import { ProfessorServices } from "../services/api";
+import ProfessorDetails from "./ProfessorDetails";
+import "../App.css";
+
+function AddProfessorForm({ onSubmit }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState({});
+  const [professors, setProfessors] = useState([]);
+
+  const f=ProfessorServices.addProfessor({
+    name: "John Doe",
+    email: "john@example.com",
+  })
+
+
+  const fetchProfessors = async () => {
+    // fetch profeesors from json server
+   
+  };
+
+//   use react hook to load professors 
+
+  const validateForm = () => {
+    // form validation 
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // validate form and post data to json server
+  };
+
+  return (
+    <div className="container">
+     {/* professor form to add professor  */}
+      <hr />
+      {/* loop through professor and load professor detail component */}
+    <label htmlFor="name">Name</label>
+    <input id="name" name="name"/>
+
+    <label htmlFor="email">Email</label>
+    <input id="email" name="email"/>
+
+    <button onClick={handleSubmit}>Add Professor</button>
+      
+
+      
+    </div>
+  );
+}
+
+export default AddProfessorForm;
+
+
+
+
+
+

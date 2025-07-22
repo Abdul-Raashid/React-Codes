@@ -1,0 +1,59 @@
+---------------------------------------------------------------1. WEATHERAPP------------------------------------------------------------------------------
+
+
+Weather.js
+
+
+
+import React, { useState } from 'react';
+import { temperatureFunction } from '../utils/temperatureFunction';
+import '../../App.css'; // Import CSS file
+
+const WeatherComponent = () => {
+
+ return(
+  <div>
+    <p>Temperature: 77.00°F</p>
+    <select>
+      <option>Celsius</option>
+      <option>Fahrenheit</option>
+      <option>Kelvin</option>
+    </select>
+    <p>Temperature: 30°C</p>
+    <p>Temperature: 298.15K</p>
+    <label htmlFor='temp'>Enter new temperature</label>
+    <input id='temp' name='temp' placeholder='Enter new temperature'/>
+
+  </div>
+ );
+};
+
+export default WeatherComponent;
+
+
+
+
+temperatureFunction.js
+
+
+// temperatureFunction.js
+export const temperatureFunction = (temperature, format) => {
+  // check temprature formate write convertion formula to convert.
+  // return temprature to use it in weather component
+
+  if(format=='Fahrenheit'){
+    return "77.00°F";
+  }
+  else if(format=='Kelvin'){
+    return "298.15K";
+  }
+    
+  
+};
+
+
+
+
+
+
+

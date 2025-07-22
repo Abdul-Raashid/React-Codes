@@ -1,0 +1,127 @@
+
+---------------------------------------------------------------------9. Dynamic Itinerary ---------------------------------------------------------
+
+
+
+Destination.js
+
+
+
+
+
+
+
+
+
+
+
+
+// Destination.js
+import React, { useEffect } from 'react';
+
+const Destination = ({ id, name, location, onRemove }) => {
+  // Simulate data fetching on initialization
+  
+  useEffect(()=>{
+
+  },[])
+  
+    
+    // Cleanup function to log when component unmounts
+    
+  
+
+  const handleRemove = () => {
+    // call OnRemove of Parent
+  };
+
+  const handleSubmit = () => {
+    // call OnRemove of Parent
+  };
+
+  return (
+    <div className="destination-container">
+     {/* display desitnation and remove button */}
+     <p>Location: Location 1</p>
+     <p>Destination 1</p>
+
+     <button onClick={handleRemove}>Remove</button>
+
+     
+    </div>
+  );
+};
+
+export default Destination;
+
+
+
+
+
+
+
+
+Trip.js
+
+
+
+
+
+
+// Trip.js
+import React, { useState } from 'react';
+import Destination from '../destination/Destination';
+import '../../App.css'
+const Trip = () => {
+  const [destinations, setDestinations] = useState([]);
+  const[ok, setOk]=useState(false);
+  // Simulate data fetching on initialization
+  React.useEffect(() => {
+    // Simulating fetching data from an API  set default desitination a
+    const fetchData = async () => {
+      
+     
+    };
+
+    
+    // Cleanup function to log when component unmounts
+  
+  }, []);
+
+  const handleAddDestination = () => {
+    // add run time desitination by udating location desitination and id
+    
+  };
+
+  const handleRemoveDestination = (id) => {
+//    remove destination logic here 
+  };
+  if(ok){
+    return(
+      <></>
+    );
+  }
+
+  return (
+    <div className="trip-container">
+    {/* add desitination to add new desitination dynamically  */}
+    {/* list down desitination   */}
+    <p>Destination 1</p>
+    <p>Location: Location 1</p>
+
+    <button onClick={handleAddDestination}>Add Destination</button>
+    <button onSubmit={handleRemoveDestination} onClick={(e)=>setOk(!ok)}>Remove</button>
+  
+  </div>
+  );
+};
+
+export default Trip;
+
+
+
+
+
+
+
+

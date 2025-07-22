@@ -1,0 +1,98 @@
+---------------------------------------------------------------- 4. RealEstate Viewer -----------------------------------------------------------------
+
+
+PropertyList.js
+
+
+
+
+
+
+
+
+
+// PropertyList.js
+import React, { useState, useEffect } from 'react';
+import PropertyService from './PropertyService';
+import { Link } from 'react-router-dom';
+import './App.css'; // Import CSS file
+
+const PropertyList = () => {
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchProperties = async () => {
+    // fetch all properties 
+  };
+  
+
+//   use react hooks to load the fetch properties on page load
+
+    // display error messages 
+
+  return (
+    <div>
+      <p>Properties List</p>
+      <p>New York - House</p>
+      <p>Los Angeles - Apartment</p>
+      <p>Error: Failed to fetch property details</p>
+      <p>Error: Failed to fetch properties</p>
+    </div>
+  );
+};
+
+export default PropertyList;
+
+
+
+
+
+
+PropertyDetail.js
+
+
+
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import PropertyService from './PropertyService';
+import './App.css'; // Import the CSS file
+
+const PropertyDetail = () => {
+  const { propertyID } = useParams();
+
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // fetch property using Property Services 
+  }, [propertyID]);
+
+//   check for loading and errors while loading 
+
+
+  return (
+    <div className="property-detail-container">
+    <h2>Property Details</h2>
+
+      <p>Type: House</p>
+      <p>Location: New York</p>
+      <p>Price: 500000</p>
+      <p>Rooms: 3</p>
+      <p>Size: 2000</p>
+      <p>Error: Failed to fetch property details</p>
+      
+    </div>
+  );
+};
+
+export default PropertyDetail;
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+
+---------------------------------------------------------------------10. BankLoan -----------------------------------------------------------------
+
+
+LoanForm.js
+
+
+
+
+
+
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import './App.css';
+const LoanForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    loanAmount: "",
+    purpose: "House",
+    tenure: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = {};
+    // Validations rules: if valid than navigate to welcome page otherwies 
+    // navigate to error page
+    
+  };
+
+  return (
+    <div>
+    <h1 className="header">Bank Loan Form</h1>
+
+    <form>
+      <label htmlFor="name">full name</label>
+      <input name="name" id="name" onChange={handleChange} value={formData.fullName}/>
+      <label htmlFor="loanAmount">loan amount</label>
+      <input name="loanAmount" id="loanAmount" onChange={handleChange} value={formData.loanAmount}/>
+      <label htmlFor="tenure">tenure</label>
+      <input id="tenure" name="tenure" onChange={handleChange} value={formData.tenure}/>
+      
+
+
+      <button type="submit">submit</button>
+    </form>
+
+    <p>loan amount must be between 1000 and 1000000</p>
+    <p>Tenure must be between 1 and 30 years</p>
+    <p>Please enter your full name</p>
+
+    {/* Create Loan Form HTML */}
+    </div>
+  );
+};
+
+export default LoanForm;
+
+
+
+
+
+
+
