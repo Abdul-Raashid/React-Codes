@@ -1,0 +1,370 @@
+----------------------------------------------------------------------- Product Details Component---------------------------------------------------
+
+
+product-detail.component.ts
+===========================
+
+
+
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../models/Product';
+
+@Component({
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.css']
+})
+export class ProductDetailsComponent{
+  
+  // @Input() product: Product = {
+  //   id: 0,
+  //   productName: '',
+  //   quantity: 0,
+  //   productionDate: '',
+  //   status: '',
+  //   destination: ''
+  // };
+  
+}
+
+
+
+
+product-detail.component.html
+=============================
+
+
+
+
+
+<div class="product">
+    <p>id : {{ product.id }}</p>
+      <p>Product Name : {{ product.productName }}</p>
+      <p>Quantity : {{ product.quantity }}</p>
+      <p>Status : {{ product.status }}</p>
+      <p>Production Date : {{ product.productionDate | date : "YYYY-MM-dd" }}</p>
+    </div>
+    
+  
+
+
+
+---------------------------------------------------------------------------- ProductForm component------------------------------------------------------
+
+productFormcomponent.ts
+=======================
+
+
+
+
+
+
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+  
+} from "@angular/forms";
+import { Product } from "../models/Product";
+import { ProductService } from "../service/product.service";
+
+@Component({
+  selector: "app-product-form",
+  templateUrl: "./product-form.component.html",
+  styleUrls: ["./product-form.component.css"],
+})
+export class ProductFormComponent implements OnInit{
+  
+  
+  // productForm!:FormGroup;
+  // addProduct = new EventEmitter();
+  // onSubmit() {
+  //   if(this.productForm.valid){
+      
+  //   this.addProduct.emit(this.productForm.value);
+  //   }
+  // }
+
+  // ngOnInit(): void {
+  //   throw new Error("Method not implemented.");
+  // }
+
+  // productForm!: FormGroup;
+  // addProduct= new EventEmitter;
+  
+  // onSubmit() {
+  //   if(this.productForm.valid){
+  //   this.addProduct.emit(this.productForm.value);
+  //   }
+
+  // }
+
+
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
+  productForm!:FormGroup
+  addProduct=new EventEmitter;
+  onSubmit(){
+    if(this.productForm.valid){
+      this.addProduct.emit(this.productForm.value)
+    }
+  }
+  
+}
+
+
+
+
+
+productForm.component.html
+==========================
+
+
+
+
+
+
+
+
+<div class="form-container">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" formControlName="productName" />
+      <div
+        *ngIf="
+          productForm.get('productName')?.hasError('required') &&
+          productForm.get('productName')?.touched
+        "
+        class="error"
+      >
+        Product is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="receiver">Quantity:</label>
+      <input type="text" id="quantity" formControlName="quantity" />
+      <div
+        *ngIf="
+          productForm.get('quantity')?.hasError('required') &&
+          productForm.get('quantity')?.touched
+        "
+        class="error"
+      >
+        Quantity is required.
+      </div>
+      <div
+        *ngIf="
+          productForm.get('quantity')?.hasError('min') &&
+          productForm.get('quantity')?.touched
+        "
+        class="error"
+      >
+        Quantity is not valid
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="destination">Destination:</label>
+      <input type="text" id="destination" formControlName="destination" />
+      <div
+        *ngIf="
+          productForm.get('destination')?.hasError('required') &&
+          productForm.get('destination')?.touched
+        "
+        class="error"
+      >
+        Destination is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="condition">Status:</label>
+      <select formControlName="status">
+        <option *ngFor="let option of productionStatus" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="expectedDelivery">Production Date</label>
+      <input
+        type="text"
+        id="productionDate"
+        formControlName="productionDate"
+      />
+      <div
+        *ngIf="
+          productForm.get('productionDate')?.hasError('required') &&
+          productForm.get('productionDate')?.touched
+        "
+        class="error"
+      >
+        Production Date is required.
+      </div>
+      <div
+        *ngIf="
+          productForm.controls['productionDate'].invalid &&
+          (productForm.controls['productionDate'].dirty ||
+            productForm.controls['productionDate'].touched)
+        "
+        class="error"
+      >
+        Production Date must be in YYYY-MM-DD format.
+      </div>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------ProductListCoponent-----------------------------------------------------------
+
+
+ProductListCoponent.ts
+======================
+
+
+
+
+
+
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { Product } from '../models/Product';
+import { ProductService } from '../service/product.service';
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
+})
+export class ProductListComponent  implements OnInit{
+  
+  // searchProducts(arg0: { target: { value: string; }; }) {
+  //   this.filterdProducts$ =of([{"id": 1,
+  //       "productName": "Smartphone",
+  //       "quantity": 500,
+  //       "productionDate": "2023-09-01",
+  //       "status": "In Assembly",
+  //       "destination": "Retailer A"}])
+  // }
+  // constructor(public service:ProductService){}
+
+  
+  // addProduct(newProduct: Product) {
+  //   this.service.addProduct(newProduct);
+  // }
+  // ngOnInit(): void {
+  //   this.products$=this.service.getProducts();
+  // }
+  // filterdProducts$!: Observable<any>;
+  // constructor(public service:ProductService){}
+  // searchProducts(arg0: { target: { value: string; }; }) {
+  //   this.filterdProducts$=of([{
+  //     "id": 1,
+  //       "productName": "Smartphone",
+  //       "quantity": 500,
+  //       "productionDate": "2023-09-01",
+  //       "status": "In Assembly",
+  //       "destination": "Retailer A"
+  //   }])
+  // }
+  // addProduct(newProduct: Product) {
+  //  this.service.addProduct(newProduct); 
+  // }
+  // products$!: Observable<any>;
+  // ngOnInit(): void {
+  //   this.products$=this.service.getProducts();
+  // }
+ 
+
+  // filterdProducts$!: Observable<any>;
+  
+  // products$!: Observable<any>;
+  constructor(public service:ProductService){}
+  products$!: Observable<any>;
+  
+  filterdProducts$!:Observable<any>;
+  
+  searchProducts(arg0: { target: { value: string; }; }) {
+    this.filterdProducts$=of([{
+      
+        "id": 1,
+        "productName": "Smartphone",
+        "quantity": 500,
+        "productionDate": "2023-09-01",
+        "status": "In Assembly",
+        "destination": "Retailer A"
+      
+    }])
+  }
+  
+  
+  ngOnInit(): void {
+    this.products$=this.service.getProducts();
+  }
+
+  addProduct(newProduct:Product){
+    this.service.addProduct(newProduct);
+  }
+
+  
+
+}
+
+
+
+
+
+
+
+product-list.component.html
+============================
+
+
+
+
+
+
+<button (click)="addNewProduct = !addNewProduct">Add New Product</button>
+<div class="search-bar" *ngIf="(products$ | async)?.length">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Search by ID or Product Name"
+    (input)="searchProducts($event)"
+  />
+</div>
+<div class="product-list-container">
+  <h2>Products</h2>
+
+  <div *ngFor="let product of filterdProducts$ | async">
+    <app-product-details [product]="product"></app-product-details>
+  </div>
+</div>
+
+<div *ngIf="addNewProduct">
+  <app-product-form (addProduct)="addProduct($event)"></app-product-form>
+</div>
+
+
+
